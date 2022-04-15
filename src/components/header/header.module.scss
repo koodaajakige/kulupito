@@ -1,0 +1,12 @@
+@import '../../assets/styles/config.scss';
+
+.header {
+    background-color: $header-background;
+    color: $header-text;
+    max-height: $header-hight;
+    min-height: $header-hight;
+    font-size: $header-fontsize;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

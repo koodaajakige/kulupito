@@ -1,14 +1,16 @@
+@import '../../assets/styles/config.scss';
+
 .item {
     display: flex;
-    border-bottom: 1px solid #BADDFE;
-    color: #999999;
+    border-bottom: 1px solid $item-border;
+    color: $item-text;
 }
 
 .item_data {
     flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 0.75rem;
+    padding: $item-padding;
 }
 
 .item_amount, .item_timespan, .item_average {
@@ -17,5 +19,5 @@
 
 .item_type, .item_amount {
     font-weight: bold;
-    color: #000000;
+    color: $item-text-strong;
 }

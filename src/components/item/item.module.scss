@@ -1,4 +1,4 @@
-@import '../../assets/styles/config.scss';
+@import '../../assets/styles/_config.scss';
 
 .item {
     display: flex;
@@ -20,4 +20,18 @@
 .item_type, .item_amount {
     font-weight: bold;
     color: $item-text-strong;
+}
+
+.item_edit {
+    max-width: $item-edit-width;
+    min-width: $item-edit-width;
+    background-color: $item-edit-background;
+    color: $item-edit-text;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.item:hover .item_edit {
+    display: flex;
 }

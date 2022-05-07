@@ -27,7 +27,7 @@ const useForm = (callback, initialState={}, resetOnSubmit=true) => {
     }
 
     // Funktio, joka palauttaa lomakkeen tiedot alkutilanteeseen.
-    const resetValues = () {
+    const resetValues = () => {
         setValues(initialState);
     }
 

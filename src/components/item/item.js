@@ -1,5 +1,6 @@
 import styles from './item.module.scss';
 import { AiOutlineRight } from "react-icons/ai";
+import { Link } from 'react-router-dom';
 
 function Item(props) {
 
@@ -29,7 +30,7 @@ function Item(props) {
                 <div className={styles.item_average}>{ average ? average + "/kk" : ""}</div>
             </div>
             <div className={styles.item_edit}>
-                <AiOutlineRight />
+                <Link to={"/edit/"+props.data.id}><AiOutlineRight /></Link>
             </div>
         </div>
     );

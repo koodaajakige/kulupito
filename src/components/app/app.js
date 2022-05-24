@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { useFirestore, useFirestoreCollectionData } from 'reactfire';
+import 'firebase/firestore';
 import styles from './app.module.scss';
 import Header from '../header';
 import Content from '../content';
@@ -16,12 +18,26 @@ function App() {
   const [data, setData] = useState([]);
   const [typelist, setTypelist] = useState([]);
 
+  const itemCollectionRef = useFirestore().collection('item');
+  const { data: itemCollection } = useFirestoreCollectionData(itemCollectionRef.orderBy("paymentDate","desc"), {initialData: [], idField: "id"});
+
+  const typeCollectionRef = useFirestore().collection('type');
+  const { data: typeCollection } = useFirestoreCollectionData(typeCollectionRef.orderBy("type"), {initialData: []});
+
   useEffect(() => {
-    setData(testdata);
-    setTypelist(["Auto", "Puhelin", "Sähkö", "Vero", "Vesi"]);
-  }, []);
+    setData(itemCollection);
+  },  [itemCollection]);
+
+  useEffect(() => {
+    const types = typeCollection.map(obj => obj.type);
+    setTypelist(types);
+  },  [typeCollection]);
 
   const handleItemSubmit =(newitem) => {
+
+    itemCollectionRef.doc(newitem.id).set(newitem);
+
+    /*
     let storeddata = data.slice();
     const index = storeddata.findIndex(item => item.id === newitem.id);
     if (index >= 0 ) {
@@ -37,19 +53,27 @@ function App() {
     });
 
     setData(storeddata);
+    */
   }
 
   const handleItemDelete = (id) => {
+    itemCollectionRef.doc(id).delete();
+
+    /*
     let storeddata = data.slice();
     storeddata = storeddata.filter(item => item.id !== id);
     setData(storeddata);
+    */
   }
 
   const handleTypeSubmit = (newtype) => {
+    typeCollectionRef.doc().set({type: newtype});
+    /*
     let storedtypelist = typelist.slice();
     storedtypelist.push(newtype);
     storedtypelist.sort();
     setTypelist(storedtypelist);
+    */
   }
 
   return (
@@ -62,7 +86,7 @@ function App() {
               <Items data={data}/>
             </Route>
             <Route path="/stats">
-              <Stats />
+              <Stats data={data} />
             </Route>
             <Route path="/settings">
               <Settings types={typelist} onTypeSubmit={handleTypeSubmit} />

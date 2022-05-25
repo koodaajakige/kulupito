@@ -1,5 +1,5 @@
 import styles from './item.module.scss';
-import { AiOutlineRight } from "react-icons/ai";
+import { AiOutlineRight } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
 function Item(props) {

@@ -17,7 +17,7 @@ function ItemForm (props) {
     }
 
     const initialState = props.data ? props.data : {
-        type: "",
+        type: props.types[0],
         amount: 0,
         paymentDate: "",
         periodStart: "",
